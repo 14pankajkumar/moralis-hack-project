@@ -1,24 +1,12 @@
-import Head from "next/head";
-import { useMoralis } from "react-moralis";
-
-const Home = () => {
-  const {logout} = useMoralis()
+const Login = ({ login, loading }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Moralis Hack Project</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to the Project
-        </h1>
         <button
-          onClick={logout}
+          onClick={login}
           className="text-3xl font-bold bg-yellow-500 p-3 rounded-lg outline-none"
         >
-          Logout
+          {loading ? "Authenticating..." : "Login"}
         </button>
       </main>
 
@@ -37,4 +25,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;
