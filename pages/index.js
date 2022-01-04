@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useMoralis } from "react-moralis";
 
 const Home = () => {
-  const {logout} = useMoralis()
+  const { logout } = useMoralis();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -11,9 +11,7 @@ const Home = () => {
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to the Project
-        </h1>
+        <h1 className="text-6xl font-bold">Welcome to the Project</h1>
         <button
           onClick={logout}
           className="text-3xl font-bold bg-yellow-500 p-3 rounded-lg outline-none"
