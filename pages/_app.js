@@ -1,18 +1,23 @@
-import { useEffect } from "react";
+import Head from "next/head";
 import { MoralisProvider, useMoralis } from "react-moralis";
 import Login from "../components/Login";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <MoralisProvider
-      appId={process.env.NEXT_PUBLIC_APP_ID}
-      serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
-    >
-      <Auth>
-        <Component {...pageProps} />
-      </Auth>
-    </MoralisProvider>
+    <div>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <MoralisProvider
+        appId={process.env.NEXT_PUBLIC_APP_ID}
+        serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
+      >
+        <Auth>
+          <Component {...pageProps} />
+        </Auth>
+      </MoralisProvider>
+    </div>
   );
 };
 
