@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { MoralisProvider, useMoralis } from "react-moralis";
+import { RecoilRoot } from "recoil";
 import { Login } from "../components";
 import "../styles/globals.css";
 
@@ -13,9 +14,11 @@ const MyApp = ({ Component, pageProps }) => {
         appId={process.env.NEXT_PUBLIC_APP_ID}
         serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
       >
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
+        <RecoilRoot>
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        </RecoilRoot>
       </MoralisProvider>
     </div>
   );

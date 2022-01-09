@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Navbar, Footer } from "../../components";
+import { Navbar, Footer, UserFeed, PostModal } from "../../components";
 
 const userProfile = ({ username }) => {
   return (
@@ -10,7 +10,11 @@ const userProfile = ({ username }) => {
 
       <div className="gradient-bg-home">
         <Navbar />
-        <h1 className="text-white">{username}</h1>
+
+        <UserFeed username={username} />
+
+        <PostModal />
+
         <Footer />
       </div>
     </div>

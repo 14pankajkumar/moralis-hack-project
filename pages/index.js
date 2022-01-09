@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Navbar, Footer } from "../components";
+import { Navbar, Footer, HomeFeed, PostModal } from "../components";
 
 const Home = () => {
   return (
@@ -10,6 +10,11 @@ const Home = () => {
 
       <div className="gradient-bg-home">
         <Navbar />
+
+        <HomeFeed />
+
+        <PostModal />
+
         <Footer />
       </div>
     </div>

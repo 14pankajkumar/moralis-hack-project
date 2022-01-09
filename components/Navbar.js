@@ -1,9 +1,18 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineLogout,
+  AiOutlinePlusCircle,
+  AiOutlineSearch,
+  AiOutlineSetting
+} from "react-icons/ai";
 import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { postModalState } from "../atoms/PostModalAtom";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -16,8 +25,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar2 = () => {
+const Navbar = () => {
   const { logout, user, isAuthenticated, authenticate } = useMoralis();
+  const [open, setOpen] = useRecoilState(postModalState);
   const router = useRouter();
 
   return (
@@ -50,6 +60,8 @@ const Navbar2 = () => {
                   )}
                 </Disclosure.Button>
               </div>
+
+              {/* Logo */}
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div
                   className="flex-shrink-0 flex items-center cursor-pointer"
@@ -66,28 +78,38 @@ const Navbar2 = () => {
                     alt="Workflow"
                   />
                 </div>
-              </div>
-              <div className={`${!isAuthenticated && "hidden"}`}>
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+
+                {/* Middle search input field */}
+                <div className="hidden md:flex justify-center">
+                  <div className="max-w-xs">
+                    <div className="relative mt-1 p-3 rounded-md">
+                      <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
+                        <AiOutlineSearch className="text-gray-400" />
+                      </div>
+                      <input
+                        className="bg-transparent blue-glassmorphism-search text-white block w-full h-10 pl-10 sm:text-sm border-gray-300 outline-none rounded-md"
+                        type="text"
+                        placeholder="Search"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* menu */}
+              <div className={`${!isAuthenticated && "hidden"}`}>
+                <div className="hidden sm:block sm:ml-6">
+                  <div className="flex space-x-4">
+                    <AiOutlinePlusCircle
+                      onClick={() => setOpen(true)}
+                      fontSize={25}
+                      className="text-white md:inline-flex cursor-pointer hover:scale-125 transition-all duration-150 ease-out"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* login button */}
               <button
                 className={`items-center my-5 w-20 bg-[#2952e3] p-3 rounded-lg font-semibold cursor-pointer hover:bg-[#2546b] text-white ${
                   isAuthenticated ? "hidden" : ""
@@ -96,6 +118,8 @@ const Navbar2 = () => {
               >
                 LogIn
               </button>
+
+              {/* user menu */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu
@@ -135,7 +159,7 @@ const Navbar2 = () => {
                               "block px-4 py-2 rounded-md text-sm text-white cursor-pointer truncate"
                             )}
                           >
-                            {user?.get("ethAddress")}
+                            {user?.get("ethAddress").slice(0,5)}...{user?.get("ethAddress").slice(-4)}
                           </p>
                         )}
                       </Menu.Item>
@@ -147,10 +171,11 @@ const Navbar2 = () => {
                               active
                                 ? "bg-gray-900 text-white"
                                 : "text-gray-300 hover:bg-gray-700",
-                              "block px-4 py-2 rounded-md text-sm text-white cursor-pointer"
+                              "px-4 py-2 rounded-md text-sm text-white cursor-pointer flex items-center"
                             )}
                           >
-                            Settings
+                            <AiOutlineSetting className="h-6 w-6 " />
+                            <p className="mx-1">Settings</p>
                           </p>
                         )}
                       </Menu.Item>
@@ -162,11 +187,11 @@ const Navbar2 = () => {
                               active
                                 ? "bg-gray-900 text-white"
                                 : "text-gray-300 hover:bg-gray-700",
-                              "px-4 py-2 rounded-md text-sm text-white cursor-pointer flex justify-between items-center"
+                              "px-4 py-2 rounded-md text-sm text-white cursor-pointer flex items-center"
                             )}
                           >
-                            <p>Sign out</p>
                             <AiOutlineLogout className="h-6 w-6 " />
+                            <p className="mx-1">Sign out</p>
                           </div>
                         )}
                       </Menu.Item>
@@ -177,27 +202,40 @@ const Navbar2 = () => {
             </div>
           </div>
 
+          {/* slider menu */}
           <Disclosure.Panel className="sm:hidden relative">
             <div
               className="z-10 fixed -top-0 -right-0 p-3 w-[60vw] h-screen shadow-2xl md:hidden list-none
             flex flex-col justify-start rounded-md blue-glassmorphism text-white animate-slide-in"
             >
-              {navigation.map((item) => (
+              <div className="flex justify-center">
+                <div className="max-w-xs">
+                  <div className="relative mt-1 p-3 rounded-md">
+                    <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
+                      <AiOutlineSearch className="text-gray-400" />
+                    </div>
+                    <input
+                      className="bg-transparent blue-glassmorphism-search text-white block w-full h-10 pl-10 sm:text-sm border-gray-300 outline-none rounded-md"
+                      type="text"
+                      placeholder="Search"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div onClick={() => setOpen(true)}>
                 <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+                  as="p"
+                  className="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium cursor-pointer"
                 >
-                  {item.name}
+                  <AiOutlinePlusCircle
+                    fontSize={25}
+                    className="text-white md:inline-flex cursor-pointer mr-1"
+                  />
+                  Post
                 </Disclosure.Button>
-              ))}
+              </div>
+              
             </div>
           </Disclosure.Panel>
         </>
@@ -206,4 +244,4 @@ const Navbar2 = () => {
   );
 };
 
-export default Navbar2;
+export default Navbar;
