@@ -13,6 +13,12 @@ class myDocument extends Document {
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <link rel="icon" href="/favicon.svg" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Philosopher&family=Poppins:ital,wght@0,600;1,500&display=swap"
+            rel="stylesheet"
+          />
           <link
             rel="apple-touch-icon"
             sizes="192x192"

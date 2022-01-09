@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { MoralisProvider, useMoralis } from "react-moralis";
-import Login from "../components/Login";
+import { Login } from "../components";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => {

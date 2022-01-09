@@ -1,20 +1,17 @@
 import Head from "next/head";
-import { useMoralis } from "react-moralis";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import { Navbar, Footer } from "../components";
 
 const Home = () => {
-  const { logout } = useMoralis();
-
   return (
-    <div>
+    <div className="min-h-screen">
       <Head>
         <title>Moralis Hack Project</title>
       </Head>
 
-      <Navbar />
-
-      <Footer />
+      <div className="gradient-bg-home">
+        <Navbar />
+        <Footer />
+      </div>
     </div>
   );
 };

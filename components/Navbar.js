@@ -1,12 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  BellIcon,
-  MenuIcon,
-  XIcon,
-  LogoutIcon,
-} from "@heroicons/react/outline";
+import { AiOutlineMenu, AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
 import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
 
@@ -21,24 +16,37 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = () => {
-  const { logout } = useMoralis();
+const Navbar2 = () => {
+  const { logout, user, isAuthenticated, authenticate } = useMoralis();
   const router = useRouter();
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure
+      as="nav"
+      className="bg-transparent top-0 z-50 blue-glassmorphism-navbar sticky"
+    >
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button
+                  className={`inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none ${
+                    !isAuthenticated && "hidden"
+                  }`}
+                >
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                    <AiOutlineClose
+                      className="block h-6 w-6"
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                    <AiOutlineMenu
+                      className="block h-6 w-6"
+                      aria-hidden="true"
+                    />
                   )}
                 </Disclosure.Button>
               </div>
@@ -58,6 +66,8 @@ const Navbar = () => {
                     alt="Workflow"
                   />
                 </div>
+              </div>
+              <div className={`${!isAuthenticated && "hidden"}`}>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -78,23 +88,26 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
+              <button
+                className={`items-center my-5 w-20 bg-[#2952e3] p-3 rounded-lg font-semibold cursor-pointer hover:bg-[#2546b] text-white ${
+                  isAuthenticated ? "hidden" : ""
+                }`}
+                onClick={authenticate}
+              >
+                LogIn
+              </button>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 relative">
+                <Menu
+                  as="div"
+                  className={`${!isAuthenticated && "ml-3 relative hidden"}`}
+                >
                   <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="relative bg-gray-800 flex text-sm rounded-full focus:outline-none">
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        className="h-8 w-8 rounded-full bg-white"
+                        src={`https://avatars.dicebear.com/api/pixel-art/${user?.getUsername()}.svg`}
                         alt=""
                       />
                     </Menu.Button>
@@ -108,17 +121,21 @@ const Navbar = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md blue-glassmorphism shadow-lg py-2 px-2 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <p
-                            href="#"
+                            onClick={() =>
+                              router.push(`/profile/${user.getUsername()}`)
+                            }
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                              active
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700",
+                              "block px-4 py-2 rounded-md text-sm text-white cursor-pointer truncate"
                             )}
                           >
-                            Your Profile
+                            {user?.get("ethAddress")}
                           </p>
                         )}
                       </Menu.Item>
@@ -127,8 +144,10 @@ const Navbar = () => {
                           <p
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                              active
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700",
+                              "block px-4 py-2 rounded-md text-sm text-white cursor-pointer"
                             )}
                           >
                             Settings
@@ -140,12 +159,14 @@ const Navbar = () => {
                           <div
                             onClick={logout}
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "px-4 py-2 text-sm text-gray-700 cursor-pointer flex justify-between items-center"
+                              active
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700",
+                              "px-4 py-2 rounded-md text-sm text-white cursor-pointer flex justify-between items-center"
                             )}
                           >
                             <p>Sign out</p>
-                            <LogoutIcon className="h-6 w-6 " />
+                            <AiOutlineLogout className="h-6 w-6 " />
                           </div>
                         )}
                       </Menu.Item>
@@ -156,8 +177,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <Disclosure.Panel className="sm:hidden relative">
+            <div
+              className="z-10 fixed -top-0 -right-0 p-3 w-[60vw] h-screen shadow-2xl md:hidden list-none
+            flex flex-col justify-start rounded-md blue-glassmorphism text-white animate-slide-in"
+            >
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
@@ -182,4 +206,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar2;
