@@ -13,3 +13,8 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+
+NFT_Post_Explorer(NFT_Marketplace) contract address = 0xbB2A1d8ab6f94148b3e5Cc5a4440610C9f5982da
+NFT_Post contract address = 0x8046f8a6b9a8c44F0C1cD9f3C774711f74CE000F
+
+avalanche testnet block explorer url = https://testnet.snowtrace.io/
