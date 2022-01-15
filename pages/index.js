@@ -3,7 +3,7 @@ import { Navbar, Footer, HomeFeed, PostModal } from "../components";
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="overflow-y-scroll h-screen text-white">
       <Head>
         <title>Moralis Hack Project</title>
       </Head>
