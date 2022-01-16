@@ -1,13 +1,20 @@
-import { useMoralis } from "react-moralis";
+import MiniProfile from "./MiniProfile";
+import Profile from "./Profile";
+import UserPosts from "./UserPosts";
 
 const UserFeed = ({ username }) => {
-  const { user } = useMoralis();
   return (
-    <div className="h-screen flex items-center justify-center">
-      <h1 className="text-white text-3xl font-bold">
-        This is user's Profile page <br /> username - {username} <br /> Address - {user.get("ethAddress")}
-      </h1>
-    </div>
+    <main>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:max-w-3xl xl:grid-cols-3 xl:max-w-6xl mx-auto md:mx-auto lg:mx-40">
+        <section className="col-span-2">
+          <Profile username={username} />
+        </section>
+      </div>
+      <div>
+        {/* user posts */}
+        <UserPosts />
+      </div>
+    </main>
   );
 };
 

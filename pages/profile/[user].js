@@ -3,7 +3,7 @@ import { Navbar, Footer, UserFeed, PostModal } from "../../components";
 
 const userProfile = ({ username }) => {
   return (
-    <div className="min-h-screen">
+    <div className="overflow-y-scroll h-screen text-white">
       <Head>
         <title>Moralis Hack Project</title>
       </Head>

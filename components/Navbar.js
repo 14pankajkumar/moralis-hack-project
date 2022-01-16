@@ -6,6 +6,7 @@ import {
   AiOutlineClose,
   AiOutlinePlusCircle,
   AiOutlineSearch,
+  AiOutlineHome,
 } from "react-icons/ai";
 import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
@@ -88,6 +89,11 @@ const Navbar = () => {
               <div className={`${!isAuthenticated && "hidden"}`}>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
+                    <AiOutlineHome
+                      onClick={() => router.push("/")}
+                      fontSize={25}
+                      className="text-white md:inline-flex cursor-pointer hover:scale-125 transition-all duration-150 ease-out"
+                    />
                     <AiOutlinePlusCircle
                       onClick={() => setOpen(true)}
                       fontSize={25}
