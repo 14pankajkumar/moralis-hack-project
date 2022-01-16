@@ -3,7 +3,7 @@ import FollowBtn from "./FollowBtn";
 
 const Suggestions = () => {
   return (
-    <div className="mt-4 ml-10 white-glassmorphism p-4">
+    <div className="h-56 mt-4 ml-10 white-glassmorphism p-7 overflow-y-scroll">
       <div className="flex justify-between text-sm mb-5">
         <h3 className="text-sm font-bold text-gray-400">Suggestions for you</h3>
         <button className="text-gray-500 font-semibold">See All</button>

@@ -3,7 +3,7 @@ import { useMoralis } from "react-moralis";
 const MiniProfile = () => {
   const { user, logout } = useMoralis();
   return (
-    <div className="flex items-center justify-between mt-14 ml-10 p-4 white-glassmorphism">
+    <div className="flex items-center justify-between mt-8 my-8 ml-10 p-7 white-glassmorphism">
       <img
         className="w-16 h-16 rounded-full border p-[2px]"
         src={`https://avatars.dicebear.com/api/pixel-art/${user?.getUsername()}.svg`}

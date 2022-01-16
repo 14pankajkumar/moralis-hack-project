@@ -4,8 +4,8 @@ import Story from "./Story";
 
 const Stories = () => {
   return (
-    <div className="hidden md:flex space-x-2 p-6 my-8 white-glassmorphism mt-8 border-gray-200 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
-      {avatar.slice(0,8).map((profile) => {
+    <div className="flex space-x-2 p-6 my-8 white-glassmorphism mt-8 border-gray-200 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
+      {avatar.map((profile) => {
         return (
           <Story
             key={profile.id}

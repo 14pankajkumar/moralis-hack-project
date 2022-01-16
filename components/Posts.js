@@ -67,46 +67,6 @@ const Posts = () => {
       image:
         "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
     },
-    {
-      id: "9",
-      username: "Rollin96",
-      profileImage: "https://picsum.photos/id/256/200/200",
-      caption: "Work at Wunsch Inc",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
-    },
-    {
-      id: "10",
-      username: "Carolyn31",
-      profileImage: "https://picsum.photos/id/267/200/200",
-      caption: "Work at Upton - Gislason",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
-    },
-    {
-      id: "11",
-      username: "Luz57",
-      profileImage: "https://picsum.photos/id/266/200/200",
-      caption: "Work at Moen - Hirthe",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
-    },
-    {
-      id: "12",
-      username: "Roger51",
-      profileImage: "https://picsum.photos/id/261/200/200",
-      caption: "Work at Upton - Gislason",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
-    },
-    {
-      id: "13",
-      username: "Zita_Berge",
-      profileImage: "https://picsum.photos/id/260/200/200",
-      caption: "Work at Moen - Hirthe",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
-    },
   ]);
 
   return (
