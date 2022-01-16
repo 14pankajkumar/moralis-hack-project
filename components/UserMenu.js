@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useMoralis } from "react-moralis";
 import { AiOutlineLogout, AiOutlineSetting } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -9,6 +10,7 @@ function classNames(...classes) {
 
 const UserMenu = () => {
   const { isAuthenticated, user, logout } = useMoralis();
+  const router = useRouter();
   return (
     <Menu as="div" className={`${!isAuthenticated && "ml-3 relative hidden"}`}>
       <div>
