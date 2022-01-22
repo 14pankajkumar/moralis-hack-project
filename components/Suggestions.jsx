@@ -1,5 +1,5 @@
 import { avatar } from "../utils/fakedata";
-import FollowBtn from "./FollowBtn";
+import {FollowBtn} from "./index";
 
 const Suggestions = () => {
   return (

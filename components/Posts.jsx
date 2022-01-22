@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Post from "./Post";
+import { Post } from "./index";
 
 const Posts = () => {
   const [posts, setPosts] = useState([
@@ -9,7 +9,7 @@ const Posts = () => {
       profileImage: "https://picsum.photos/id/237/200/200",
       caption: "Work at Ledner - Kris",
       image:
-        "https://firebasestorage.googleapis.com/v0/b/instagram-clone-b0561.appspot.com/o/posts%2FBDW8da2DODRpJQmxoMlC%2Fimage?alt=media&token=88383e21-3be7-4b1d-8fe9-f2156635796f",
+        "https://ipfs.moralis.io:2053/ipfs/QmZps38W8GTavuBeRXFbbC22m5oxYDRiYP6DgZogwvNUsJ",
     },
     {
       id: "2",

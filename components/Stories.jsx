@@ -1,6 +1,6 @@
 import React from "react";
 import { avatar } from "../utils/fakedata";
-import Story from "./Story";
+import {Story} from "./index";
 
 const Stories = () => {
   return (

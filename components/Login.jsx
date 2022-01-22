@@ -1,5 +1,5 @@
 import { useMoralis } from "react-moralis";
-import { Navbar, LoginSection, Footer, Services, Loading } from "../components";
+import { Navbar, LoginSection, Footer, Services, Loading } from ".";
 
 const Login = () => {
   const { isAuthenticating } = useMoralis();

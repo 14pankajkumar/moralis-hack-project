@@ -3,18 +3,25 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AiOutlineExclamationCircle, AiOutlineCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { postModalState } from "../atoms/PostModalAtom";
+import Moralis from "moralis";
+import { useMoralis } from "react-moralis";
 
 const PostModal = () => {
+  const { user } = useMoralis();
   const [open, setOpen] = useRecoilState(postModalState);
   const cancelButtonRef = useRef(null);
   const filePickerRef = useRef(null);
   const captionRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [imageFile, setimageFile] = useState(null);
+
+  console.log(imageFile?.name);
 
   const addImageToPost = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
+      setimageFile(e.target.files[0]);
       reader.readAsDataURL(e.target.files[0]);
     }
 
@@ -23,11 +30,35 @@ const PostModal = () => {
     };
   };
 
-  const onSubmit = () => {
-    console.log("Submit button clicked");
-    setOpen(false);
+  const onSubmit = async () => {
+    // Save file input to IPFS
+    const file = new Moralis.File("FirstNFTpost", imageFile);
+    await file.saveIPFS();
+
+    console.log(file.ipfs(), file.hash());
+
+    // Save file reference to Moralis
+    const posts = new Moralis.Object("Posts");
+    posts.set("name", user.getUsername());
+    posts.set("files", file);
+    await posts.save();
+
+    // setOpen(false);
     setLoading(false);
     setSelectedFile(null);
+  };
+
+  const getData = () => {
+    // retrive file
+    const query = new Moralis.Query("Posts");
+    query.equalTo("name", user.getUsername());
+    query.find().then(function ([posts]) {
+      const ipfs = posts.get("files").ipfs();
+      const hash = posts.get("files").hash();
+
+      console.log("IPFS url", ipfs);
+      console.log("IPFS hash", hash);
+    });
   };
 
   return (
@@ -130,6 +161,8 @@ const PostModal = () => {
                 >
                   {loading ? "Uploading..." : "Upload Post"}
                 </button>
+
+                <button onClick={getData}>get data</button>
               </div>
             </div>
           </Transition.Child>
