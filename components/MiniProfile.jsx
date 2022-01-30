@@ -11,7 +11,7 @@ const MiniProfile = () => {
       />
 
       <div className="flex-1 mx-4">
-        <h2 className="font-bold">{user?.get("ethAddress").slice(0,5)}...{user?.get("ethAddress").slice(-4)}</h2>
+        <h2 className="font-bold">{user?.get("ethAddress").slice(0,4)}...{user?.get("ethAddress").slice(-4)}</h2>
         <h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
       </div>
 

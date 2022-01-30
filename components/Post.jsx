@@ -6,22 +6,21 @@ import { BiHappy } from "react-icons/bi";
 import { useState } from "react";
 import Moment from "react-moment";
 
-const Post = ({ id, username, userImg, image, caption }) => {
+const Post = ({ id, username, image, caption }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([
     {
       id: id,
-      userImg: userImg,
       username: username,
       comment: "Nice pic",
     },
   ]);
 
   const sendComment = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log("comment button clicked");
-    setComment("")
-  }
+    setComment("");
+  };
 
   return (
     <div className="white-glassmorphism my-7 border rounded-sm">
@@ -29,7 +28,7 @@ const Post = ({ id, username, userImg, image, caption }) => {
       <div className="flex items-center p-5">
         <img
           className="rounded-full h-12 w-12 object-contain border p-1 mr-3"
-          src={userImg}
+          src={`https://avatars.dicebear.com/api/pixel-art/${username}.svg`}
           alt=""
         />
         <p className="flex-1 font-bold">{username}</p>
@@ -52,7 +51,6 @@ const Post = ({ id, username, userImg, image, caption }) => {
 
       {/* captions */}
       <div className="p-5 truncate">
-        <span className="font-bold mr-1">{username} </span>
         {caption}
       </div>
 
@@ -65,11 +63,7 @@ const Post = ({ id, username, userImg, image, caption }) => {
                 key={comment.id}
                 className="flex items-center space-x-2 mb-3"
               >
-                <img
-                  className="h-7 rounded-full"
-                  src={comment.userImg}
-                  alt=""
-                />
+                <img className="h-7 rounded-full" src={comment.ethAdd} alt="" />
                 <p className="text-sm flex-1">
                   <span className="font-bold">{comment.username} </span>
                   {comment.comment}

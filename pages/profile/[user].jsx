@@ -1,7 +1,13 @@
 import Head from "next/head";
-import { Navbar, Footer, UserFeed, PostModal } from "../../components";
+import {
+  Navbar,
+  Footer,
+  UserFeed,
+  PostModal,
+  ChangeUsername,
+} from "../../components";
 
-const userProfile = ({ username }) => {
+const userProfile = ({ address }) => {
   return (
     <div className="overflow-y-scroll h-screen text-white">
       <Head>
@@ -11,9 +17,10 @@ const userProfile = ({ username }) => {
       <div className="gradient-bg-home">
         <Navbar />
 
-        <UserFeed username={username} />
+        <UserFeed address={address} />
 
         <PostModal />
+        <ChangeUsername />
 
         <Footer />
       </div>
@@ -24,10 +31,10 @@ const userProfile = ({ username }) => {
 export default userProfile;
 
 export async function getServerSideProps(context) {
-  const username = context.query.user;
+  const address = context.query.user;
   return {
     props: {
-      username,
+      address,
     },
   };
 }

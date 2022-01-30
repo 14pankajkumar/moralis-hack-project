@@ -36,7 +36,9 @@ const UserMenu = () => {
           <Menu.Item>
             {({ active }) => (
               <p
-                onClick={() => router.push(`/profile/${user.getUsername()}`)}
+                onClick={() =>
+                  router.push(`/profile/${user.get("ethAddress")}`)
+                }
                 className={classNames(
                   active
                     ? "bg-gray-900 text-white"
@@ -44,7 +46,7 @@ const UserMenu = () => {
                   "block px-4 py-2 rounded-md text-sm text-white cursor-pointer truncate"
                 )}
               >
-                {user?.get("ethAddress").slice(0, 5)}...
+                {user?.get("ethAddress").slice(0, 4)}...
                 {user?.get("ethAddress").slice(-4)}
               </p>
             )}

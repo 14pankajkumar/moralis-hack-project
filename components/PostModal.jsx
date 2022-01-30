@@ -1,10 +1,11 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { AiOutlineExclamationCircle, AiOutlineCamera } from "react-icons/ai";
+import { AiOutlineCamera } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { postModalState } from "../atoms/PostModalAtom";
 import Moralis from "moralis";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisFile } from "react-moralis";
+import Web3 from "web3";
 
 const PostModal = () => {
   const { user } = useMoralis();
@@ -14,14 +15,15 @@ const PostModal = () => {
   const captionRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [imageFile, setimageFile] = useState(null);
-
-  console.log(imageFile?.name);
+  const [imageFile, setImageFile] = useState(null);
+  const { error, isUploading, moralisFile, saveFile } = useMoralisFile();
+  const web3 = new Web3(window.ethereum);
+  const nft_contract_address = "0x337C65B6E2689783948B54E99aAE6399EfDe8f63";
 
   const addImageToPost = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
-      setimageFile(e.target.files[0]);
+      setImageFile(e.target.files[0]);
       reader.readAsDataURL(e.target.files[0]);
     }
 
@@ -31,33 +33,84 @@ const PostModal = () => {
   };
 
   const onSubmit = async () => {
+    setLoading(true);
+
     // Save file input to IPFS
-    const file = new Moralis.File("FirstNFTpost", imageFile);
-    await file.saveIPFS();
+    saveFile(imageFile.name, imageFile, { saveIPFS: true });
 
-    console.log(file.ipfs(), file.hash());
+    const imageURL = moralisFile?.ipfs();
 
-    // Save file reference to Moralis
-    const posts = new Moralis.Object("Posts");
-    posts.set("name", user.getUsername());
-    posts.set("files", file);
-    await posts.save();
+    const metadata = {
+      name: "Ben 10",
+      description: captionRef.current.value,
+      image: imageURL,
+    };
 
-    // setOpen(false);
-    setLoading(false);
-    setSelectedFile(null);
+    saveFile(imageFile.name, imageFile, {
+      metadata,
+      saveIPFS: true,
+    })
+      .then(async (res) => {
+        console.log(res._ipfs);
+        // console.log("Image uploaded", moralisFile?._ipfs, moralisFile?._hash);
+        const imageURL_2 = res._ipfs;
+        const imageHash = res._hash;
+
+        await mintToken(imageURL_2)
+          .then((res) => {
+            console.log(res);
+            saveData(imageURL_2, imageHash);
+          })
+          .catch((err) => console.log(err));
+        setOpen(false);
+        setLoading(false);
+        setImageFile(null);
+        setSelectedFile(null);
+      })
+      .catch((err) => console.log(err));
   };
 
-  const getData = () => {
-    // retrive file
-    const query = new Moralis.Query("Posts");
-    query.equalTo("name", user.getUsername());
-    query.find().then(function ([posts]) {
-      const ipfs = posts.get("files").ipfs();
-      const hash = posts.get("files").hash();
+  // function for mint token
+  const mintToken = async (_uri) => {
+    const encodedFunction = web3.eth.abi.encodeFunctionCall(
+      {
+        name: "mintToken",
+        type: "function",
+        inputs: [
+          {
+            type: "string",
+            name: "tokenURI",
+          },
+        ],
+      },
+      [_uri]
+    );
 
-      console.log("IPFS url", ipfs);
-      console.log("IPFS hash", hash);
+    const transactionParameters = {
+      to: nft_contract_address,
+      from: ethereum.selectedAddress,
+      data: encodedFunction,
+    };
+
+    const txtId = await ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+
+    return txtId;
+  };
+
+  // save data to moralis
+  const saveData = (ipfsUrl, ipfsHash) => {
+    const Posts = Moralis.Object.extend("Posts");
+    const posts = new Posts();
+
+    posts.save({
+      username: user.getUsername(),
+      ethAddress: user.get("ethAddress"),
+      caption: captionRef.current.value,
+      ipfsUrl: ipfsUrl,
+      ipfsHash: ipfsHash,
     });
   };
 
@@ -161,8 +214,6 @@ const PostModal = () => {
                 >
                   {loading ? "Uploading..." : "Upload Post"}
                 </button>
-
-                <button onClick={getData}>get data</button>
               </div>
             </div>
           </Transition.Child>

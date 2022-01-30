@@ -1,3 +1,4 @@
+import ChangeUsername from "./ChangeUsername";
 import FollowBtn from "./FollowBtn";
 import Footer from "./Footer";
 import HomeFeed from "./HomeFeed";
@@ -39,5 +40,6 @@ export {
   Suggestions,
   UserMenu,
   UserPosts,
-  UserPost
+  UserPost,
+  ChangeUsername,
 };

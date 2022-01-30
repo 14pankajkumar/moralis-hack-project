@@ -28,7 +28,9 @@
     "react-moment": "^1.1.1",
     "react-moralis": "^0.3.11",
     "recoil": "^0.5.2",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "web3": "^1.7.0",
+    "web3modal": "^1.9.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",

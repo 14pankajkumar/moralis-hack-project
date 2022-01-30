@@ -1,4 +1,3 @@
-import { FiMoreHorizontal } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsChat, BsBookmark } from "react-icons/bs";
 import { IoPaperPlaneOutline } from "react-icons/io5";
@@ -6,12 +5,11 @@ import { BiHappy } from "react-icons/bi";
 import { useState } from "react";
 import Moment from "react-moment";
 
-const UserPost = ({ id, username, userImg, image, caption }) => {
+const UserPost = ({ id, username, image, caption }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([
     {
       id: id,
-      userImg: userImg,
       username: username,
       comment: "Nice pic",
     },
@@ -24,17 +22,8 @@ const UserPost = ({ id, username, userImg, image, caption }) => {
   };
 
   return (
-    <div className="white-glassmorphism my-7 border rounded-sm md:m-3 xl:m-3">
-      {/* Header */}
-      <div className="flex items-center p-5">
-        <img
-          className="rounded-full h-12 w-12 object-contain border p-1 mr-3"
-          src={userImg}
-          alt=""
-        />
-        <p className="flex-1 font-bold">{username}</p>
-        <FiMoreHorizontal className="h-5" fontSize={25} />
-      </div>
+    <div className="white-glassmorphism my-7 border rounded-sm md:m-3 xl:m-3 overflow-hidden">
+
 
       {/* image */}
       <img className="object-cover w-full" src={image} alt="" />
@@ -51,10 +40,7 @@ const UserPost = ({ id, username, userImg, image, caption }) => {
       </div>
 
       {/* captions */}
-      <div className="p-5 truncate">
-        <span className="font-bold mr-1">{username} </span>
-        {caption}
-      </div>
+      <div className="p-5 truncate">{caption}</div>
 
       {/* comments */}
       {comments.length > 0 && (
