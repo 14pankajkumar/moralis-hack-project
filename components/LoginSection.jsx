@@ -18,7 +18,7 @@ const LoginSection = () => {
             across the world
           </h1>
           <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
-            Explore the crypto world. Buy and sell NFTs easily on hamara.
+            Explore the crypto world. Buy and sell NFTs easily on hamara.io
           </p>
           <button
             type="button"
