@@ -8,7 +8,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <div>
       <Head>
-        <title>Moralis Hack Project</title>
+        <title>hamara.io</title>
       </Head>
       <MoralisProvider
         appId={process.env.NEXT_PUBLIC_APP_ID}

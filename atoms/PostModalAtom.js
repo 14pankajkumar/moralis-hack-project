@@ -9,3 +9,8 @@ export const editModal = atom({
   key: "editModal",
   default: false,
 });
+
+export const noticeModal = atom({
+  key: "editModal",
+  default: true,
+});

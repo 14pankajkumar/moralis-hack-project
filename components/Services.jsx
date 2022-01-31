@@ -1,6 +1,6 @@
-import { BsShieldFillCheck } from "react-icons/bs";
-import { BiSearchAlt } from "react-icons/bi";
 import { RiHeart2Fill } from "react-icons/ri";
+import { FaOpencart } from "react-icons/fa";
+import { AiOutlineCamera } from "react-icons/ai";
 
 const Services = () => {
   const ServiceCard = ({ color, title, icon, subtitle }) => (
@@ -22,9 +22,9 @@ const Services = () => {
       <div className="flex mf:flex-row flex-col items-center justify-between md:p-20 py-12 px-4">
         <div className="flex-1 flex flex-col justify-start items-start">
           <h1 className="text-white text-3xl sm:text-5xl py-2 text-gradient ">
-            Services that we
+            Explore 
             <br />
-            continue to improve
+            web3 social media
           </h1>
           <p className="text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base">
             The best choice for buying and selling your crypto assets, with the
@@ -35,21 +35,21 @@ const Services = () => {
         <div className="flex-1 flex flex-col justify-start items-center">
           <ServiceCard
             color="bg-[#2952E3]"
-            title="Security gurantee"
-            icon={<BsShieldFillCheck fontSize={21} className="text-white" />}
-            subtitle="Security is guranteed. We always maintain privacy and maintain the quality of our products"
-          />
-          <ServiceCard
-            color="bg-[#8945F8]"
-            title="Best exchange rates"
-            icon={<BiSearchAlt fontSize={21} className="text-white" />}
-            subtitle="Security is guranteed. We always maintain privacy and maintain the quality of our products"
+            title="Mint NFTs"
+            icon={<AiOutlineCamera fontSize={21} className="text-white" />}
+            subtitle="Turn your awesome pictures into NFTs in a decentrelized way. NFTs can really be anything digital such as drawings, photos, videos etc."
           />
           <ServiceCard
             color="bg-[#F84550]"
-            title="Fastest transactions"
+            title="Social Media"
             icon={<RiHeart2Fill fontSize={21} className="text-white" />}
-            subtitle="Security is guranteed. We always maintain privacy and maintain the quality of our products"
+            subtitle="Now your NFTs are not just collectibles but you can share your NFTs with other poeple."
+          />
+          <ServiceCard
+            color="bg-[#8945F8]"
+            title="MarketPlace"
+            icon={<FaOpencart fontSize={21} className="text-white" />}
+            subtitle="You can sell and buy NFTs easily on same platform with cheaper fees and lightning-fast speed"
           />
         </div>
       </div>

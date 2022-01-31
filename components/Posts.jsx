@@ -2,7 +2,7 @@ import { Post } from "./index";
 import { useMoralisQuery } from "react-moralis";
 
 const Posts = () => {
-  const { data, isLoading, error } = useMoralisQuery(
+  const { data } = useMoralisQuery(
     "Posts",
     (query) => query.descending("createdAt"),
     [],
@@ -13,23 +13,17 @@ const Posts = () => {
 
   return (
     <div>
-      {isLoading ? (
-        "Loading..."
-      ) : (
-        <>
-          {data.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                id={post.id}
-                username={post.attributes.username}
-                image={post.attributes.ipfsUrl}
-                caption={post.attributes.caption}
-              />
-            );
-          })}
-        </>
-      )}
+      {data.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            id={post.id}
+            username={post.attributes.username}
+            image={post.attributes.ipfsUrl}
+            caption={post.attributes.caption}
+          />
+        );
+      })}
     </div>
   );
 };

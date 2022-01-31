@@ -8,6 +8,7 @@ import {
   AiOutlineSearch,
   AiOutlineHome,
 } from "react-icons/ai";
+import { SiAppannie } from "react-icons/si";
 import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
@@ -56,15 +57,15 @@ const Navbar = () => {
                   className="flex-shrink-0 flex items-center cursor-pointer"
                   onClick={() => router.push("/")}
                 >
-                  <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
+                  <SiAppannie
+                    className="block lg:hidden"
+                    fontSize={35}
+                    color="white"
                   />
-                  <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Workflow"
+                  <SiAppannie
+                    className="hidden lg:block"
+                    fontSize={35}
+                    color="white"
                   />
                 </div>
 

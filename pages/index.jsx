@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="overflow-y-scroll h-screen text-white">
       <Head>
-        <title>Moralis Hack Project</title>
+        <title>hamara.io</title>
       </Head>
 
       <div className="gradient-bg-home">

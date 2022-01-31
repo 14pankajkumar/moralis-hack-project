@@ -1,13 +1,14 @@
 import { FiMoreHorizontal } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BsChat, BsBookmark } from "react-icons/bs";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+import { BsChat } from "react-icons/bs";
+import { IoPaperPlaneOutline, IoDiamondOutline } from "react-icons/io5";
 import { BiHappy } from "react-icons/bi";
 import { useState } from "react";
 import Moment from "react-moment";
 
 const Post = ({ id, username, image, caption }) => {
   const [comment, setComment] = useState("");
+  const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([
     {
       id: id,
@@ -41,18 +42,29 @@ const Post = ({ id, username, image, caption }) => {
       {/* buttons */}
       <div className="flex justify-between px-4 py-4">
         <div className="flex space-x-4">
-          <AiOutlineHeart className="btn" fontSize={25} />
+          {liked ? (
+            <AiFillHeart
+              color="red"
+              className="btn"
+              fontSize={25}
+              onClick={() => setLiked(false)}
+            />
+          ) : (
+            <AiOutlineHeart
+              className="btn"
+              fontSize={25}
+              onClick={() => setLiked(true)}
+            />
+          )}
           <BsChat className="btn" fontSize={25} />
           <IoPaperPlaneOutline className="btn" fontSize={25} />
         </div>
 
-        <BsBookmark className="btn" fontSize={25} />
+        <IoDiamondOutline className="btn" fontSize={25} />
       </div>
 
       {/* captions */}
-      <div className="p-5 truncate">
-        {caption}
-      </div>
+      <div className="p-5 truncate">{caption}</div>
 
       {/* comments */}
       {comments.length > 0 && (

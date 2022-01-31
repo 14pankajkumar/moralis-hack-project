@@ -12,7 +12,7 @@ const MiniProfile = () => {
 
       <div className="flex-1 mx-4">
         <h2 className="font-bold">{user?.get("ethAddress").slice(0,4)}...{user?.get("ethAddress").slice(-4)}</h2>
-        <h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
+        <h3 className="text-sm text-gray-400">Welcome to Web3</h3>
       </div>
 
       <button onClick={logout} className="text-blue-400 text-sm font-semibold">

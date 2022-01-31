@@ -7,9 +7,11 @@ import Login from "./Login";
 import LoginSection from "./LoginSection";
 import MiniProfile from "./MiniProfile";
 import Navbar from "./Navbar";
+import NoticeModal from "./NoticeModal";
 import Post from "./Post";
 import PostModal from "./PostModal";
 import Posts from "./Posts";
+import PoweredBy from "./PoweredBy";
 import Profile from "./Profile";
 import Services from "./Services";
 import Stories from "./Stories";
@@ -42,4 +44,6 @@ export {
   UserPosts,
   UserPost,
   ChangeUsername,
+  PoweredBy,
+  NoticeModal,
 };

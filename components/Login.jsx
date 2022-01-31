@@ -1,5 +1,13 @@
 import { useMoralis } from "react-moralis";
-import { Navbar, LoginSection, Footer, Services, Loading } from ".";
+import {
+  Navbar,
+  LoginSection,
+  Footer,
+  Services,
+  Loading,
+  PoweredBy,
+  NoticeModal,
+} from ".";
 
 const Login = () => {
   const { isAuthenticating } = useMoralis();
@@ -11,6 +19,8 @@ const Login = () => {
       <Navbar />
       <LoginSection />
       <Services />
+      {/* <NoticeModal /> */}
+      <PoweredBy />
       <Footer />
     </div>
   );

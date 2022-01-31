@@ -4,7 +4,6 @@ import Image from "next/image";
 
 const LoginSection = () => {
   const { authenticate } = useMoralis();
-
   const commonStyles =
     "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
@@ -26,17 +25,15 @@ const LoginSection = () => {
             onClick={authenticate}
             className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-lg cursor-pointer hover:bg-[#2546b]"
           >
-            <p className="text-base text-white font-semibold">
-              Connenct Wallet
-            </p>
+            <p className="text-base text-white font-semibold">Connect Wallet</p>
           </button>
 
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
             <div className={`rounded-tl-xl ${commonStyles}`}>Reliability</div>
             <div className={`${commonStyles}`}>Security</div>
-            <div className={`rounded-tr-xl ${commonStyles}`}>Ethereum</div>
+            <div className={`rounded-tr-xl ${commonStyles}`}>Avalanche</div>
             <div className={`rounded-bl-xl ${commonStyles}`}>Web 3.0</div>
-            <div className={`${commonStyles}`}>Low fess</div>
+            <div className={`${commonStyles}`}>Low fees</div>
             <div className={`rounded-br-xl ${commonStyles}`}>Blockchain</div>
           </div>
         </div>
