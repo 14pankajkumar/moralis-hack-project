@@ -22,7 +22,7 @@ const Services = () => {
       <div className="flex mf:flex-row flex-col items-center justify-between md:p-20 py-12 px-4">
         <div className="flex-1 flex flex-col justify-start items-start">
           <h1 className="text-white text-3xl sm:text-5xl py-2 text-gradient ">
-            Explore 
+            Explore
             <br />
             web3 social media
           </h1>
@@ -43,13 +43,13 @@ const Services = () => {
             color="bg-[#F84550]"
             title="Social Media"
             icon={<RiHeart2Fill fontSize={21} className="text-white" />}
-            subtitle="Now your NFTs are not just collectibles but you can share your NFTs with other poeple."
+            subtitle="Now your NFTs are not just collectibles but you can share your NFTs with other people."
           />
           <ServiceCard
             color="bg-[#8945F8]"
             title="MarketPlace"
             icon={<FaOpencart fontSize={21} className="text-white" />}
-            subtitle="You can sell and buy NFTs easily on same platform with cheaper fees and lightning-fast speed"
+            subtitle="You can sell and buy NFTs easily on same platform with cheaper fees and lightning-fast speed."
           />
         </div>
       </div>

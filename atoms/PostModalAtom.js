@@ -12,5 +12,5 @@ export const editModal = atom({
 
 export const noticeModal = atom({
   key: "editModal",
-  default: true,
+  default: false,
 });
